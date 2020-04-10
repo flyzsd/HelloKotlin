@@ -25,6 +25,10 @@ class Test : Runnable {
     }
 }
 
+fun interface LetUsRun {
+    fun run(): Unit
+}
+
 val f = { x: String -> println(x) }
 val f2: (String) -> Unit = { x: String -> println(x) }
 typealias PrintString = (String) -> Unit

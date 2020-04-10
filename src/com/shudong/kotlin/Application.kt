@@ -9,6 +9,8 @@ fun main() {
     printAll("hello", "world")
     val dog = Dog("larry")
     dog.hello()
+    dog.bark()
+    println("-> ${dog.nickName}")
 }
 
 fun numbers() {
@@ -116,6 +118,10 @@ object ThisIsASingleton {
 }
 
 fun singleton() {
+    val single = object {
+        val name = "this is single"
+    }
+    print("the name is ${single.name}")
     print("the name is ${ThisIsASingleton.name}")
 }
 
@@ -138,8 +144,32 @@ open class Animal(val name: String) {
 }
 
 class Dog(name: String) : Animal(name = name) {
+    companion object {
+        private const val logger: String = "this is a logger"
+        fun log(message: String) {
+            println("message -> $message")
+            println("message -> $logger")
+        }
+    }
+
     override fun hello() {
         super.hello()
         println("hello $name as a dog")
     }
 }
+
+enum class Color(val rgb: Int) {
+    RED(0xFF0000),
+    GREEN(0x00FF00),
+    BLUE(0x0000FF);
+
+    fun hello() {
+        println("${this.name} -> $rgb -> ${toString()}")
+    }
+}
+
+fun Dog.bark() = println("dog bak inside extension function")
+val Dog.nickName: String
+    get() = this.name.toUpperCase()
+
+fun <T> T?.nullSafeToString(): String = this?.toString() ?: "NULL"
