@@ -1,8 +1,14 @@
+package com.shudong.kotlin
+
 fun main() {
     println("hello world!")
     numbers()
     string()
     letUsLoop()
+    singleton()
+    printAll("hello", "world")
+    val dog = Dog("larry")
+    dog.hello()
 }
 
 fun numbers() {
@@ -23,6 +29,8 @@ fun numbers() {
         println(element.toInt())
     }
 }
+
+fun max(a: Int, b: Int) = if (a > b) a else b       //ternary operator equivalent in kotlin
 
 fun array() {
     val array1 = arrayOf(1, 2, 3)
@@ -70,7 +78,7 @@ fun hasPrefix(x: Any): Unit = when (x) {
     in 3 until 10 -> println("in 3 until 10")
     !in 20..100 -> println("not in 20..100")
     is String -> println("is String")
-    !is Int -> println("is not Int")
+    !is Int -> Unit                             //do nothing
     else -> println("else")
 }
 
@@ -101,4 +109,37 @@ fun letUsLoop() {
     }
 
     (1..10).forEach { println(it) }
+}
+
+object ThisIsASingleton {
+    const val name: String = "JetBrain"
+}
+
+fun singleton() {
+    print("the name is ${ThisIsASingleton.name}")
+}
+
+fun printAll(vararg messages: String) {
+    for (message in messages) {
+        println(message)
+    }
+}
+
+class GenericClassA<E>(vararg items: E) {
+}
+
+fun <E> genericFunctionA(vararg items: E) {
+}
+
+open class Animal(val name: String) {
+    open fun hello() {
+        println("hello $name")
+    }
+}
+
+class Dog(name: String) : Animal(name = name) {
+    override fun hello() {
+        super.hello()
+        println("hello $name as a dog")
+    }
 }

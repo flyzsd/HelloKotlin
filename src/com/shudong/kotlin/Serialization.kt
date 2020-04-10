@@ -1,3 +1,5 @@
+package com.shudong.kotlin
+
 import kotlin.system.measureTimeMillis
 
 data class Customer(val name: String, val age: Int)
@@ -22,3 +24,10 @@ class Test : Runnable {
         TODO("not implemented")
     }
 }
+
+val f = { x: String -> println(x) }
+val f2: (String) -> Unit = { x: String -> println(x) }
+typealias PrintString = (String) -> Unit
+
+val f3: PrintString = f
+val f4: PrintString = f2
